@@ -1,7 +1,9 @@
 package com.freenow.android_demo;
 
 import android.content.Context;
+import android.os.SystemClock;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.matcher.RootMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -45,12 +47,14 @@ public class ExampleInstrumentedTest {
     }
 
 
+
     @Test
     public void LoginSearchDisplayUserCall() throws Exception{
 
         loginUsers();
         SearchDriverCallTest cs = new SearchDriverCallTest();
         cs.searchDriver();
+        //searchDriver();
     }
 
     @Test
@@ -67,38 +71,41 @@ public class ExampleInstrumentedTest {
 
 
 
-    /*@Test
+    @Test
     public void searchDriver() throws Exception {
 
 
         String driver = "sa";
-        if (0 != driver.length()) {
+        /*if (0 != driver.length()) {
             onView(withId(R.id.textSearch)).perform(typeText(driver.substring(0,1)));
             for(int i= 1; i < driver.length(); i++) {
                 onView(withId(R.id.textSearch)).perform(typeTextIntoFocusedView(driver.substring(i,i+1)));
             }
         }*/
-        //onView(withId(R.id.textSearch)).perform(typeText("s"),closeSoftKeyboard());
-
+        onView(withId(R.id.textSearch)).perform(typeText("s"), closeSoftKeyboard());
+        Thread.sleep(450);
         //SystemClock.sleep(500);
-        //onView(withId(R.id.textSearch)).perform(typeText("a"), closeSoftKeyboard());
+        onView(withId(R.id.textSearch)).perform(typeText("a"));
         /*onView(withText("Sarah Scott"))
                 .inRoot(withDecorView(not(is(mActivity.getWindow().getDecorView()))))
                 .check(matches(isDisplayed()));*/
         /*onView(withText("Sarah Scott"))
                 .inRoot(RootMatchers.isPlatformPopup()).check(matches(isDisplayed()));
+        */
 
         onView(withText("Sarah Scott"))
+                .inRoot(RootMatchers.isPlatformPopup()).check(matches(isDisplayed()));
+        onView(withText("Sarah Scott"))
                 .inRoot(RootMatchers.isPlatformPopup())
-                .perform(click());*/
+                .perform(click());
 
         /*onView(withText("Sarah Scott"))
                 .inRoot(withDecorView(not(is(mActivity.getWindow().getDecorView()))))
                 .perform(click());*/
-        /*
+
         onView(withId(R.id.fab)).check(matches(isDisplayed()));
         onView(withId(R.id.fab)).perform(click());
 
-    }*/
+    }
 
 }

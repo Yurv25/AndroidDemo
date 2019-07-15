@@ -17,6 +17,7 @@ import com.freenow.android_demo.models.Driver;
 import com.freenow.android_demo.utils.GlideApp;
 
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class DriverProfileActivity extends AppCompatActivity {
 
@@ -58,7 +59,7 @@ public class DriverProfileActivity extends AppCompatActivity {
         textViewName.setText(driver.getName());
         GlideApp.with(this).load(driver.getAvatar()).placeholder(R.drawable.ic_driver).apply(RequestOptions.circleCropTransform()).into(imageViewAvatar);
         textViewLocation.setText(driver.getLocation());
-        textViewDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(driver.getRegisteredDate()));
+        textViewDate.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.GERMANY).format(driver.getRegisteredDate()));
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

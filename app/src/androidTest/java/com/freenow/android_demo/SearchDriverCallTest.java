@@ -31,15 +31,18 @@ public class SearchDriverCallTest {
 
         /*String[] driver = {"S", "a", "r", "a","h"};*/
         String driver = "sa";
+        onView(withId(R.id.textSearch)).check(matches(isDisplayed()));
         /*if (0 != driver.length()) {
             onView(withId(R.id.textSearch)).perform(typeText(driver.substring(0,1)));
             for(int i= 1; i < driver.length(); i++) {
                 onView(withId(R.id.textSearch)).perform(typeTextIntoFocusedView(driver.substring(i,i+1)));
             }
         }*/
+
         onView(withId(R.id.textSearch)).perform(typeText("s"),closeSoftKeyboard());
-        SystemClock.sleep(150);
-        onView(withId(R.id.textSearch)).perform(typeTextIntoFocusedView("a"), closeSoftKeyboard());
+        Thread.sleep(500);
+        //SystemClock.sleep(550);
+        onView(withId(R.id.textSearch)).perform(typeText("a"));
         /*onView(withText("Sarah Scott"))
                 .inRoot(withDecorView(not(is(mActivity.getWindow().getDecorView()))))
                 .check(matches(isDisplayed()));*/
