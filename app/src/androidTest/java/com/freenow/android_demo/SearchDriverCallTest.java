@@ -40,7 +40,7 @@ public class SearchDriverCallTest {
         }*/
 
         onView(withId(R.id.textSearch)).perform(typeText("s"),closeSoftKeyboard());
-        Thread.sleep(500);
+        Thread.sleep(450);
         //SystemClock.sleep(550);
         onView(withId(R.id.textSearch)).perform(typeText("a"));
         /*onView(withText("Sarah Scott"))

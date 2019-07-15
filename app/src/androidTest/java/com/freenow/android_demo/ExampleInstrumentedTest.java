@@ -1,6 +1,7 @@
 package com.freenow.android_demo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.SystemClock;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.matcher.RootMatchers;
@@ -32,11 +33,25 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
 
+    @Rule
+    public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<MainActivity>(MainActivity.class,true,false){
+        @Override
+        protected Intent getActivityIntent(){
+            Intent intent = new Intent ();
+            intent.putExtra("key","value");
+            return intent;
+        }
+    };
+    @Rule
+    public ActivityTestRule<AuthenticationActivity> authActivityRule = new ActivityTestRule<AuthenticationActivity>(AuthenticationActivity.class,true,false){
+        @Override
+        protected Intent getActivityIntent(){
+           Intent intent = new Intent ();
+           intent.putExtra("key","value");
+           return intent;
+        }
+    };
 
-    @Rule
-    public ActivityTestRule<AuthenticationActivity> authActivityRule = new ActivityTestRule<>(AuthenticationActivity.class);
-    @Rule
-    public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
     public void useAppContext() throws Exception {
@@ -52,14 +67,16 @@ public class ExampleInstrumentedTest {
     public void LoginSearchDisplayUserCall() throws Exception{
 
         loginUsers();
-        SearchDriverCallTest cs = new SearchDriverCallTest();
-        cs.searchDriver();
-        //searchDriver();
+        //SearchDriverCallTest cs = new SearchDriverCallTest();
+        //cs.searchDriver();
+        searchDriver();
     }
 
     @Test
     public void loginUsers() throws Exception{
 
+        Intent intent = new Intent();
+        authActivityRule.launchActivity(null);
         onView(withId(R.id.edt_username)).check(matches(isDisplayed()));
         onView(withId(R.id.edt_password)).check(matches(isDisplayed()));
         onView(withId(R.id.edt_username)).perform(typeText("crazydog335"), closeSoftKeyboard());
@@ -69,12 +86,10 @@ public class ExampleInstrumentedTest {
     }
 
 
-
-
     @Test
     public void searchDriver() throws Exception {
 
-
+        mActivityRule.launchActivity(null);
         String driver = "sa";
         /*if (0 != driver.length()) {
             onView(withId(R.id.textSearch)).perform(typeText(driver.substring(0,1)));
@@ -107,5 +122,7 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.fab)).perform(click());
 
     }
+
+
 
 }

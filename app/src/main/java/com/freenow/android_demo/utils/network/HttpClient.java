@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
@@ -106,7 +107,7 @@ public class HttpClient {
             String date = registered.get("date").getAsString();
             Date registeredDate;
             try {
-                registeredDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+                registeredDate = new SimpleDateFormat("yyyy-MM-dd", Locale.GERMANY).parse(date);
             } catch (ParseException e) {
                 e.printStackTrace();
                 registeredDate = new Date(0);
