@@ -46,6 +46,7 @@ jobs:
               --type instrumentation \
               --app ${APK_PATH} \ 
               --test ${TEST_APK_PATH} \ 
+              --device model=Pixel2,orientation=portrait \
               --results-bucket cloud-test-${GOOGLE_PROJECT_ID}
       - run:
           name: Install gsutil dependency and copy test results data
