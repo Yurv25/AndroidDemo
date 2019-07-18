@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -41,7 +41,7 @@ jobs:
             sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
       - run:
           name: Test with Firebase Test Lab
-          command: >
+          command: |
             sudo gcloud firebase test android run \ 
               --app app-debug.apk \ 
               --test app-debug-androidTest.apk \ 
