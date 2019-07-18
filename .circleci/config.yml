@@ -41,13 +41,13 @@ jobs:
             sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
       - run:
           name: Test with Firebase Test Lab
-          command: sudo gcloud firebase test android run --app ${APK_PATH} --test ${TEST_APK_PATH} --directories-to-pull=/sdcard/tmp --timeout 20m
+          command: sudo gcloud firebase test android run --app ${APK_PATH} --test ${TEST_APK_PATH} --directories-to-pull=/sdcard/tmp --timeout 20m --results-bucket androiddemo-598cf.appspot.com
       - run:
           name: Install gsutil dependency and copy test results data
           command: |
             sudo pip install -U crcmod
             mkdir -p ~/gsutil/
-            sudo gsutil -m cp -r -U `sudo gsutil ls gs:// ${GOOGLE_PROJECT_ID} | tail -1` ~/gsutil/ | true
+            sudo gsutil -m cp -r -U `sudo gsutil ls gs://androiddemo-598cf.appspot.com | tail -1` ~/gsutil/ | true
          # - run:
         #  name: Setup emulator
        #   command: sdkmanager "system-images;android-21;default;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-21;default;armeabi-v7a"
