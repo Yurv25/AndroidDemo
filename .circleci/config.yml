@@ -46,7 +46,7 @@ jobs:
           name: Install gsutil dependency and copy test results data
           command: |
             sudo pip install -U crcmod
-             mkdir -p ~/gsutil/
+            mkdir -p ~/gsutil/
             sudo gsutil -m cp -r -U `sudo gsutil ls gs://androiddemo-598cf.appspot.com | tail -1` ~/gsutil/ | true
          # - run:
         #  name: Setup emulator
