@@ -46,7 +46,8 @@ jobs:
           name: Install gsutil dependency and copy test results data
           command: |
             sudo pip install -U crcmod
-            sudo gsutil -m cp -r -U `sudo gsutil ls gs://androiddemo-598cf.appspot.com | tail -1` app/build/test-results | true
+             mkdir -p ~/gsutil/
+            sudo gsutil -m cp -r -U `sudo gsutil ls gs://androiddemo-598cf.appspot.com | tail -1` ~/gsutil/ | true
          # - run:
         #  name: Setup emulator
        #   command: sdkmanager "system-images;android-21;default;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-21;default;armeabi-v7a"
@@ -66,7 +67,7 @@ jobs:
        #   name: Run EspressoTests
         #  command: ./gradlew app:connectedAndroidTest --stacktrace
       - store_artifacts:
-          path: app/build/reports
+          path: ~/gsutil/
           destination: reports
       - store_test_results:
-          path: app/build/test-results
+          path: ~/gsutil/
